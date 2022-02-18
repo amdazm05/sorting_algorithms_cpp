@@ -4,6 +4,7 @@
 #define sorting_algo
 #include <vector>
 template <typename type>
+//Class defintion
 class Sorting
 {
     public:
