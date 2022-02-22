@@ -47,8 +47,7 @@ template<typename type>
 void Sorting<type>::selection_sort(std::vector<type> &Vec)
 {   
     iter j=0;
-    std::cout<<"minimum"<<this->get_minimum_element(Vec)<<std::endl;
-    std::cout<<"minimum"<<this->get_maximum_element(Vec)<<std::endl;
+
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
         // find the minimum element in the array
