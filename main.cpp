@@ -11,6 +11,5 @@ int main(){
     Obj.selection_sort(at);
     Obj.bubble_sort(at);
     Obj_char.bubble_sort(at_char);
-    
-    // Obj.display();
+    return 0;
 }
