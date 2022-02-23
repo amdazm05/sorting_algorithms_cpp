@@ -24,8 +24,8 @@ class Sorting
 
     private:
     std::vector<type> Vec;
-    iter get_minimum_element(std::vector<type> &Vec);
-    iter get_maximum_element(std::vector<type> &Vec);
+    iter get_minimum_element(std::vector<type> &Vec,iter start_index,iter end_index);
+    iter get_maximum_element(std::vector<type> &Vec, iter start_index,iter end_index);
 };
 
 #endif

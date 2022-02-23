@@ -47,16 +47,19 @@ template<typename type>
 void Sorting<type>::selection_sort(std::vector<type> &Vec)
 {   
     iter j=0;
-    std::cout<<"minimum"<<this->get_minimum_element(Vec)<<std::endl;
-    std::cout<<"minimum"<<this->get_maximum_element(Vec)<<std::endl;
+    iter minima_loop_index=0;
+    type swap;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        // find the minimum element in the array
-        for (iter j=0; j<Vec.size();j++)
-        {
-            
-        }
+       minima_loop_index = get_minimum_element(Vec,j,Vec.size()-1);
+       swap=Vec[j];
+       Vec[j]=Vec[minima_loop_index];
+       Vec[minima_loop_index]=swap;
+       j++;
     }
+    for(int i=0;i<Vec.size();i++)
+        std::cout<<Vec.at(i)<<" ";
+    std::cout<<std::endl;
 }
 
 template <typename type>
@@ -69,16 +72,24 @@ void Sorting<type>::display()
 }
 
 template <typename type>
-iter Sorting<type>::get_minimum_element(std::vector<type> &Vec)
+iter Sorting<type>::get_minimum_element(std::vector<type> &Vec, iter start_index,iter end_index)
 {
-    iter i=0;
-    iter minima_index=0;
+    //Exception handling
+    if (start_index>end_index)
+        return -1;
+
+    iter i=start_index;
+    iter minima_index=start_index;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        if(i-1>=0)
+        if(i-1>=start_index)
         {
-            minima_index= Vec[i]<Vec[i-1]? i:minima_index;
-            std::cout<<"minimum"<<minima_index<<std::endl;
+            minima_index= Vec[i]<Vec[minima_index]? i:minima_index;
+            
+        }
+        if(i==end_index)
+        {
+            break;
         }
         i++;
     }
@@ -86,18 +97,25 @@ iter Sorting<type>::get_minimum_element(std::vector<type> &Vec)
 }
 
 template <typename type>
-iter Sorting<type>::get_maximum_element(std::vector<type> &Vec)
+iter Sorting<type>::get_maximum_element(std::vector<type> &Vec ,iter start_index,iter end_index)
 {
-    iter i=0;
-    iter maxima_index=0;
+    //Exception handling
+    if (start_index>end_index)
+        return -1;
+
+    iter i=start_index;
+    iter maxima_index=start_index;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        if(i-1>=0)
+        if(i-1>=start_index)
         {
-            maxima_index= Vec[i]>Vec[i-1]? i:maxima_index;
+            maxima_index= Vec[i]>Vec[maxima_index]? i:maxima_index;
+        }
+        if(i==end_index)
+        {
+            break;
         }
         i++;
     }
-    std::cout<<"Maximum"<<maxima_index<<std::endl;
     return maxima_index;
 }
