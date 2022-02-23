@@ -18,7 +18,6 @@ void Sorting<type>::bubble_sort( std::vector<type> &Vec)
     iter i=0;
     iter j=0;
     iter temp;
-    std::cout<<"Maximum is "<<get_maximum_element(Vec,1,(Vec.size()-1))<<std::endl;
     for (auto it = begin (Vec); it != end (Vec); ++it) 
     {
         // The std::vector::data() is an STL in C++ which returns a direct pointer to the memory array used internally by the vector to store its owned elements
@@ -48,11 +47,19 @@ template<typename type>
 void Sorting<type>::selection_sort(std::vector<type> &Vec)
 {   
     iter j=0;
-
+    iter minima_loop_index=0;
+    type swap;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        
+       minima_loop_index = get_minimum_element(Vec,j,Vec.size()-1);
+       swap=Vec[j];
+       Vec[j]=Vec[minima_loop_index];
+       Vec[minima_loop_index]=swap;
+       j++;
     }
+    for(int i=0;i<Vec.size();i++)
+        std::cout<<Vec.at(i)<<" ";
+    std::cout<<std::endl;
 }
 
 template <typename type>
@@ -67,14 +74,22 @@ void Sorting<type>::display()
 template <typename type>
 iter Sorting<type>::get_minimum_element(std::vector<type> &Vec, iter start_index,iter end_index)
 {
-    iter i=0;
-    iter minima_index=0;
+    //Exception handling
+    if (start_index>end_index)
+        return -1;
+
+    iter i=start_index;
+    iter minima_index=start_index;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        if(i-1>=0)
+        if(i-1>=start_index)
         {
-            minima_index= Vec[i]<Vec[i-1]? i:minima_index;
-            std::cout<<"minimum"<<minima_index<<std::endl;
+            minima_index= Vec[i]<Vec[minima_index]? i:minima_index;
+            
+        }
+        if(i==end_index)
+        {
+            break;
         }
         i++;
     }
@@ -84,13 +99,17 @@ iter Sorting<type>::get_minimum_element(std::vector<type> &Vec, iter start_index
 template <typename type>
 iter Sorting<type>::get_maximum_element(std::vector<type> &Vec ,iter start_index,iter end_index)
 {
+    //Exception handling
+    if (start_index>end_index)
+        return -1;
+
     iter i=start_index;
     iter maxima_index=start_index;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        if(i-1>=0)
+        if(i-1>=start_index)
         {
-            maxima_index= Vec[i]>Vec[i-1]? i:maxima_index;
+            maxima_index= Vec[i]>Vec[maxima_index]? i:maxima_index;
         }
         if(i==end_index)
         {
@@ -98,6 +117,5 @@ iter Sorting<type>::get_maximum_element(std::vector<type> &Vec ,iter start_index
         }
         i++;
     }
-    std::cout<<"Maximum"<<maxima_index<<std::endl;
     return maxima_index;
 }
