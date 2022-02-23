@@ -18,6 +18,7 @@ void Sorting<type>::bubble_sort( std::vector<type> &Vec)
     iter i=0;
     iter j=0;
     iter temp;
+    std::cout<<"Maximum is "<<get_maximum_element(Vec,1,(Vec.size()-1))<<std::endl;
     for (auto it = begin (Vec); it != end (Vec); ++it) 
     {
         // The std::vector::data() is an STL in C++ which returns a direct pointer to the memory array used internally by the vector to store its owned elements
@@ -50,11 +51,7 @@ void Sorting<type>::selection_sort(std::vector<type> &Vec)
 
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
-        // find the minimum element in the array
-        for (iter j=0; j<Vec.size();j++)
-        {
-            
-        }
+        
     }
 }
 
@@ -68,7 +65,7 @@ void Sorting<type>::display()
 }
 
 template <typename type>
-iter Sorting<type>::get_minimum_element(std::vector<type> &Vec)
+iter Sorting<type>::get_minimum_element(std::vector<type> &Vec, iter start_index,iter end_index)
 {
     iter i=0;
     iter minima_index=0;
@@ -85,15 +82,19 @@ iter Sorting<type>::get_minimum_element(std::vector<type> &Vec)
 }
 
 template <typename type>
-iter Sorting<type>::get_maximum_element(std::vector<type> &Vec)
+iter Sorting<type>::get_maximum_element(std::vector<type> &Vec ,iter start_index,iter end_index)
 {
-    iter i=0;
-    iter maxima_index=0;
+    iter i=start_index;
+    iter maxima_index=start_index;
     for(auto it=begin(Vec);it!=end(Vec);++it)
     {
         if(i-1>=0)
         {
             maxima_index= Vec[i]>Vec[i-1]? i:maxima_index;
+        }
+        if(i==end_index)
+        {
+            break;
         }
         i++;
     }
